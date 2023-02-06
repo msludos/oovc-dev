@@ -1,11 +1,15 @@
 from flask import Flask, render_template, url_for
 import os
 
+def get_host():
+    return os.environ.get("HOST")
+
 app = Flask(__name__)
+
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template("index.html", host=get_host())
 
 @app.route('/map')
 def map():
@@ -34,10 +38,6 @@ def news():
 @app.route('/news/<id>')
 def new(id):
     return render_template("news/news.html")
-
-@app.route('/host')
-def host():
-    return os.environ.get("HOST")
 
 
 if __name__ == "__main__":
