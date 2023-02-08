@@ -3,7 +3,7 @@ import os, requests
 
 def get_host():
     host = os.environ.get("HOST")
-    return "https://OOVCbot.msludos.repl.co"
+    return host
 
 def get_news():
     url = get_host()+"/api/news"
