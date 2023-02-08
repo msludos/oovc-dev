@@ -1,8 +1,11 @@
 from flask import Flask, render_template, url_for
-import os
+import os, requests
 
 def get_host():
-    return os.environ.get("HOST")
+    host = os.environ.get("HOST")
+
+def get_token():
+    api = os.environ.get("API")
 
 app = Flask(__name__)
 
@@ -33,6 +36,12 @@ def faq():
 
 @app.route('/news')
 def news():
+    params = (
+        ('v', '5.107'),
+        ('access_token', get_token()),
+        ('owner_id', "")
+    )
+    response = requests.get('https://api.vk.com/method/wall.get?', params=params) 
     return render_template("news/index.html")
 
 @app.route('/news/<id>')
