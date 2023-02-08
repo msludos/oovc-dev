@@ -44,3 +44,17 @@ body {
     align-items: center;
     color: white;
 }
+
+.block {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.block-header {
+    margin-bottom: 15px;
+}
+
+.block-text {
+    margin-left: 10px;
+}
