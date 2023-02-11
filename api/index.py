@@ -1,20 +1,39 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 import os, requests
+from time import sleep
 
 def get_host():
     host = os.environ.get("HOST")
     return host
 
 def get_news():
-    url = get_host()+"/api/news"
-    news = requests.get(url).json()
+    url = get_host()+"/getnews"
+    news = requests.get(url).json() 
     r = []
 
     for n in news:
-        if n["id"] > 1250:
+        if n["id"] > 1249:
             r.append(n)
 
     return r
+
+def get_countries():
+    url = get_host()+"/getcountries"
+    countries = list(requests.get(url).json()["countries"])
+
+    return countries
+
+def get_countriesids():
+    url = get_host()+"/getcountriesids"
+    ids = list(requests.get(url).json()["ids"])
+
+    return ids
+
+def get_country(id):
+    url = get_host()+"/getcountry?id="+id
+    country = requests.get(url).json()
+
+    return country
 
 app = Flask(__name__)
 
@@ -25,7 +44,7 @@ def index():
 
 @app.route('/map')
 def map():
-    return render_template("map/index.html")
+    return render_template("map/index.html", ids=get_countriesids())
 
 @app.route('/map/accept')
 def accept():
@@ -37,11 +56,7 @@ def countries():
 
 @app.route('/countries/<id>')
 def country(id):
-    return render_template("countries/country.html", id=id)
-
-@app.route('/faq')
-def faq():
-    return render_template("faq/index.html")
+    return render_template("countries/country.html", country=get_country(id))
 
 @app.route('/news')
 def news():
@@ -49,9 +64,12 @@ def news():
     return render_template("news/index.html", len=len(news_j), news=news_j)
 
 @app.route('/news/<id>')
-def new(id):
+def news_id(id):
     return render_template("news/news.html")
 
+@app.route('/faq')
+def faq():
+    return render_template("faq/index.html")
 
 if __name__ == "__main__":
     app.run()
