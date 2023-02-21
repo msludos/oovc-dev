@@ -6,8 +6,12 @@ def get_host():
     host = os.environ.get("HOST")
     return host
 
+def get_vcs_api():
+    host = os.environ.get("VCS_API")
+    return host
+
 def get_news():
-    url = get_host()+"/getnews"
+    url = get_host()+"/method/news.gets?access_token="+get_vcs_api()
     news = requests.get(url).json() 
     r = []
 
@@ -18,19 +22,19 @@ def get_news():
     return r
 
 def get_countries():
-    url = get_host()+"/getcountries"
+    url = get_host()+"/method/countries.gets?access_token="+get_vcs_api()
     countries = list(requests.get(url).json()["countries"])
 
     return countries
 
 def get_countriesids():
-    url = get_host()+"/getcountriesids"
+    url = get_host()+"/method/countries.ids?access_token="+get_vcs_api()
     ids = list(requests.get(url).json()["ids"])
 
     return ids
 
 def get_country(id):
-    url = get_host()+"/getcountry?id="+id
+    url = get_host()+"/method/country.get?access_token="+get_vcs_api()+"&id="+id
     country = requests.get(url).json()
 
     return country
