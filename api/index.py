@@ -44,7 +44,7 @@ def index():
 
 @app.route('/map')
 def map():
-    return render_template("map/index.html", ids=get_countriesids())
+    return render_template("map/index.html")
 
 @app.route('/map/accept')
 def accept():
