@@ -48,12 +48,25 @@ function setMapJson(json, id, flag, name) {
                 {icon: icon_f}).bindPopup(feature.properties.name);
             },
             onEachFeature: function (feature, latlng) {
-                if (feature.geometry.type != "Point") latlng.bindPopup(`<div class="popup-country"><img src="${flag}"><hr><a href="/sections/countries/country.html?id=${id}">${name}❯</a><script>console.log("a");</script></div>`);
+                if (feature.geometry.type != "Point") latlng.bindPopup(`
+		<div class="popup-country"><img src="${flag}"><hr><a href="/sections/countries/country.html?id=${id}">${name}❯</a><script>console.log("a");</script></div>
+		`);
             }
         }).addTo(map);
     });
 }
 
 window.onload = function() {
-    document.querySelector(".leaflet-attribution-flag").remove();
+fetch('https://oovc.vercel.app/api/geoid.php').then((response) => response.json())
+    .then((geos) => {
+        geos.ids.forEach(element => {
+            $.get(`https://oovc.vercel.app/api/country.php?id=${element}&fields=name,flag`, function(data) {
+                let datas = data.split("~");
+                $.get(`https://oovc.vercel.app/api/geo.php?id=${element}`, function(geo) {
+                    setMapJson(JSON.parse(geo).features, element, datas[1], datas[0]); 
+                });     
+            });
+        });
+    });
+document.querySelector(".leaflet-attribution-flag").remove();
 }
