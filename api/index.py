@@ -43,9 +43,8 @@ def get_geo():
     ids = list(requests.get("https://vcs.pythonanywhere.com/method/geo.ids?access_token="+get_vcs_api()).json()["ids"])
     geos = {}
     for id in ids:
-        geos[str(id)] = requests.get("https://vcs.pythonanywhere.com/method/geo.get?access_token="+get_vcs_api()+"&id="+str(id)).text
+        geos[str(id)] = requests.get("https://vcs.pythonanywhere.com/method/geo.get?access_token="+get_vcs_api()+"&id="+str(id)).text.replace("{", "\{").replace("}", "\}")
     
-    print(geos)
     return geos
 
 
