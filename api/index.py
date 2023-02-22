@@ -58,11 +58,15 @@ def index():
 
 @app.route('/map')
 def map():
-    return render_template("map/index.html", geos=get_geo())
+    return render_template("map/index.html")
 
 @app.route('/map/accept')
 def accept():
     return render_template("map/accept.html")
+
+@app.route('/map/geo')
+def geo():
+    return get_geo()
 
 @app.route('/countries')
 def countries():
