@@ -40,12 +40,8 @@ def get_country(id):
     return country
 
 def get_geo():
-    ids = list(requests.get("https://vcs.pythonanywhere.com/method/geo.ids?access_token="+get_vcs_api()).json()["ids"])
-    geos = {}
-    for id in ids:
-        geos[str(id)] = requests.get("https://vcs.pythonanywhere.com/method/geo.get?access_token="+get_vcs_api()+"&id="+str(id)).text.replace("{", "\{").replace("}", "\}")
-    
-    return geos
+    ids = requests.get("https://vcs.pythonanywhere.com/method/geo.ids?access_token="+get_vcs_api()).json()
+    return ids
 
 
 app = Flask(__name__)
@@ -57,15 +53,11 @@ def index():
 
 @app.route('/map')
 def map():
-    return render_template("map/index.html")
+    return render_template("map/index.html", ids=get_geo())
 
 @app.route('/map/accept')
 def accept():
     return render_template("map/accept.html")
-
-@app.route('/map/geo')
-def geo():
-    return get_geo()
 
 @app.route('/countries')
 def countries():

@@ -57,11 +57,13 @@ function setMapJson(json, id, flag, name) {
 }
 
 window.onload = function() {
-    $.get(`https://oovc-dev.vercel.app/map/geo`, function(data) {
-        JSON.parse(data).forEach(element => {
-            setMapJson(JSON.parse(geo).features, element, datas[1], datas[0]);     
-        });  
+    ids.ids.forEach(element => {
+        $.get(`vcs.pythonanywhere.com/method/geo.get?&id=${element}`, function(data) {
+            console.log(element);
+            JSON.parse(data).forEach(element => {
+                setMapJson(JSON.parse(geo).features, element, datas[1], datas[0]);     
+            });  
+        });
     });
-
     document.querySelector(".leaflet-attribution-flag").remove();
 }
