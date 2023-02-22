@@ -57,16 +57,13 @@ function setMapJson(json, id, flag, name) {
 }
 
 window.onload = function() {
-fetch('https://oovc.vercel.app/api/geoid.php').then((response) => response.json())
-    .then((geos) => {
-        geos.ids.forEach(element => {
-            $.get(`https://oovc.vercel.app/api/country.php?id=${element}&fields=name,flag`, function(data) {
-                let datas = data.split("~");
-                $.get(`https://oovc.vercel.app/api/geo.php?id=${element}`, function(geo) {
-                    setMapJson(JSON.parse(geo).features, element, datas[1], datas[0]); 
-                });     
-            });
+    geos.ids.forEach(element => {
+        $.get(`https://oovc.vercel.app/api/country.php?id=${element}&fields=name,flag`, function(data) {
+            let datas = data.split("~");
+            $.get(`https://oovc.vercel.app/api/geo.php?id=${element}`, function(geo) {
+                setMapJson(JSON.parse(geo).features, element, datas[1], datas[0]); 
+            });     
         });
     });
-document.querySelector(".leaflet-attribution-flag").remove();
+    document.querySelector(".leaflet-attribution-flag").remove();
 }

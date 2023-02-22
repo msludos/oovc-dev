@@ -59,23 +59,33 @@ body::-webkit-scrollbar-thumb {
     color: white;
 }
 
+input {
+    border-radius: 7px;
+    background-color: black;
+    border: 1px solid black;
+    padding: 10px 20px;
+    color: white;
+}
+
+input:hover {
+    border-radius: 10px;
+}
+
 .block {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
 }
 
-.block-header {
+.block>* {
     margin-bottom: 15px;
 }
 
 .block-text {
-    margin-left: 10px;
+    margin-left: 20px;
+    width: 55%;
 }
 
-input {
-    border-radius: 7px;
-    background-color: white;
-    border: 1px solid dimgray;
-    padding: 10px 20px;
+.block-input {
+    width: min-content;
 }

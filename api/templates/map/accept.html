@@ -1,12 +1,30 @@
 {% extends 'base.html' %}
 
-{% block title %}
-Подтверждение
-{% endblock %}
+{% block title %}Подтверждение{% endblock %}
 
 {% block links %}
 {% endblock %}
 
 {% block main %}
-<h1>OOVC</h1>   
+<div class="block">
+    <h1 class="block-header">Подтверждение</h1>
+    <div class="block-text">Организация Объединённых Виртуальных Государств - вымышленная "организация",
+        Организация не имеет никакой реальной политической силы и не ставит своею целью что-либо из политики.
+        Она подчистую является выдумкой и поддерживается желающими этого людьми.
+        Карта "стран" ООВГ является пародией на реальную карту мира и не имеет политической силы.</div>
+    <input type="button" value="OK" class="block-input">
+</div>
+
+<script>
+    window.onload = function() {
+        if (localStorage.acceptMap != 1) {
+            document.querySelector(".block-input").addEventListener("click", function() {
+                localStorage.acceptMap = 1;
+                location.href = "/map";
+            });
+        } else {
+            location.href = "/map";
+        }
+    }
+</script>
 {% endblock %}
