@@ -19,6 +19,6 @@
 {% block main %}
 <div id="map"></div>
 
-<script>var ids = JSON.parse("{{ ids }}".replaceAll("&#39;", " "));</script>
+<script>var json = "{{ ids }}".replaceAll("&#39;", " "); var ids = JSON.parse(json);</script>
 <script src="{{ url_for('static', filename='js/map.js') }}"></script>
 {% endblock %}
