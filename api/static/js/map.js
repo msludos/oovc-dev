@@ -17,7 +17,7 @@ var capital_point_marker = L.icon({
     iconSize: [16, 16]
 });
 
-function setMapJson(json, id, flag, name) {
+function setMapJson(json, id, flag, name, status) {
     json.forEach(element => {
         L.geoJSON(element, {
             style: {
@@ -49,7 +49,7 @@ function setMapJson(json, id, flag, name) {
             },
             onEachFeature: function (feature, latlng) {
                 if (feature.geometry.type != "Point") latlng.bindPopup(`
-		<div class="popup-country"><img src="${flag}"><hr><a href="/sections/countries/country.html?id=${id}">${name}❯</a><script>console.log("a");</script></div>
+		<div class="popup-country"><img src="${flag}"><div class="w"><a href="/sections/countries/country.html?id=${id}">${name}</a><br><div class="status">Статус: ${status == "new" ? "Новая" : "Основная"}</div></div></div>
 		`);
             }
         }).addTo(map);
@@ -61,7 +61,8 @@ window.onload = function() {
         console.log(element);
         $.get(`https://oovc-dev.vercel.app/redirect/geo?id=${element}`, function(data) {
             console.log(data)
-            setMapJson(JSON.parse(data.split("~")[0]).features, element, data.split("~")[1], data.split("~")[2]);     
+            let data = data.split("~")
+            setMapJson(JSON.parse(data.split("~")[0]).features, element, data[1], data[2], data[3]);     
         });
     });
     document.querySelector(".leaflet-attribution-flag").remove();

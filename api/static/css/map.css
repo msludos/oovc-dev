@@ -11,3 +11,23 @@ body {
     height: 93.8%;
     border-radius: 20px;
 }
+
+.popup-country {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 0px solid white;
+    border-radius: 7px;
+}
+
+.popup-country .w {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-country img {
+    width: 180px;
+    height: 120px;
+}
