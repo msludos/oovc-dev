@@ -59,7 +59,7 @@ function setMapJson(json, id, flag, name) {
 window.onload = function() {
     ids.ids.forEach(element => {
         console.log(element);
-        $.get(`https://vcs.pythonanywhere.com/method/geo.get?&id=${element}`, function(data) {
+        $.get(`https://oovc-dev.vercel.app/redirect/geo?id=${element}`, function(data) {
             JSON.parse(data).forEach(element => {
                 setMapJson(JSON.parse(geo).features, element, datas[1], datas[0]);     
             });  

@@ -80,5 +80,9 @@ def news_id(id):
 def faq():
     return render_template("faq/index.html")
 
+@app.route('/redirect/geo')
+def Rgeo():
+    return requests.get("https://vcs.pythonanywhere.com/method/geo.get?id="+request.args.get("id"))
+
 if __name__ == "__main__":
     app.run()
