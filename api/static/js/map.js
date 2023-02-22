@@ -59,7 +59,6 @@ function setMapJson(json, id, flag, name) {
 window.onload = function() {
     ids.ids.forEach(element => {
         console.log(element);
-        return
         $.get(`vcs.pythonanywhere.com/method/geo.get?&id=${element}`, function(data) {
             JSON.parse(data).forEach(element => {
                 setMapJson(JSON.parse(geo).features, element, datas[1], datas[0]);     
