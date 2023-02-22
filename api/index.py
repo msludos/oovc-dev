@@ -82,7 +82,7 @@ def faq():
 
 @app.route('/redirect/geo')
 def Rgeo():
-    return requests.get("https://vcs.pythonanywhere.com/method/geo.get?id="+request.args.get("id"))
+    return requests.get("https://vcs.pythonanywhere.com/method/geo.get?id="+request.args.get("id")).text
 
 if __name__ == "__main__":
     app.run()
