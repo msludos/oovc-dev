@@ -13,7 +13,7 @@ body {
 }
 
 .popup-country {
-    flex-direction: row;
+    flex-direction: row !important;
     justify-content: center;
     align-items: center;
     background-color: white;
