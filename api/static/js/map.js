@@ -49,7 +49,7 @@ function setMapJson(json, id, flag, name, status) {
             },
             onEachFeature: function (feature, latlng) {
                 if (feature.geometry.type != "Point") latlng.bindPopup(`
-		<div class="popup-country"><img src="${flag}"><div class="w"><a href="/sections/countries/country.html?id=${id}">${name}</a><br><div class="status">Статус: ${status != "new" ? "Основная" : "Новая"}</div></div></div>
+		<div class="popup-country"><img src="${flag}"><div class="w"><a href="/sections/countries/country.html?id=${id}">${name}</a><br><div class="status">Статус: ${status == "main" ? "Основная" : "Новая"}</div></div></div>
 		`);
             }
         }).addTo(map);
