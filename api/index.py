@@ -82,7 +82,8 @@ def faq():
 
 @app.route('/redirect/geo')
 def Rgeo():
-    return requests.get("https://vcs.pythonanywhere.com/method/geo.get?id="+request.args.get("id")).text
+    country = requests.get("https://vcs.pythonanywhere.com/method/country.get?id="+request.args.get("id")+"&access_token="+get_vcs_api()).json()["country"]
+    return requests.get("https://vcs.pythonanywhere.com/method/geo.get?id="+request.args.get("id")).text+"~"+country["flag"]+"~"+country["name"]
 
 if __name__ == "__main__":
     app.run()

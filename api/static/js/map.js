@@ -60,7 +60,7 @@ window.onload = function() {
     ids.ids.forEach(element => {
         console.log(element);
         $.get(`https://oovc-dev.vercel.app/redirect/geo?id=${element}`, function(data) {
-            setMapJson(JSON.parse(data).features, element, datas[1], datas[0]);     
+            setMapJson(JSON.parse(data.split("~")[0]).features, element, data.split("~")[1], data.split("~")[2]);     
         });
     });
     document.querySelector(".leaflet-attribution-flag").remove();
