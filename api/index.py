@@ -44,8 +44,9 @@ def get_geo():
     geos = {}
     for id in ids:
         geos[str(id)] = requests.get("https://vcs.pythonanywhere.com/method/geo.get?access_token="+get_vcs_api()+"&id="+str(id)).text
-
-    return str(geos)
+    
+    print(geos)
+    return geos
 
 
 app = Flask(__name__)
