@@ -61,7 +61,7 @@ window.onload = function() {
         console.log(element);
         $.get(`https://oovc-dev.vercel.app/redirect/geo?id=${element}`, function(data) {
             console.log(data)
-            let data = data.split("~")
+            data = data.split("~")
             setMapJson(JSON.parse(data.split("~")[0]).features, element, data[1], data[2], data[3]);     
         });
     });
