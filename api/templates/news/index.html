@@ -10,8 +10,8 @@
 <div class="news">
     {% for i in range(0, len) %}
         <div class="block-item">
-            <h3 class="block-header">{{ news[i]["text"].split("\n")[0] }}</h3>
-            <div class="block-text">{{ news[i]["text"].split("\n")[1] }}...</div>
+            <h3 class="block-header">{{ news[i].split("\n")[0] }}</h3>
+            <div class="block-text">{{ news[i].split("\n")[1] }}...</div>
         </div>
     {% endfor %}
 </div>
