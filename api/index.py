@@ -17,7 +17,7 @@ def get_vk_api():
 def get_news():
     r = []
 
-    for offset in range(0, 1300, 100):
+    for offset in range(0, 400, 100):
         try:
             req = requests.get("https://api.vk.com/method/wall.get?owner_id=-201784905&count=100&offset="+str(offset)+"&v=5.131&access_token="+get_vk_api()).json()["response"]["items"]
     
