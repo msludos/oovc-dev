@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, redirect
 import os, requests
 from time import sleep
 
@@ -76,14 +76,14 @@ def countries():
 def country(id):
     return render_template("countries/country.html", country=get_country(id))
 
-@app.route('/news')
-def news():
+@app.route('/about')
+def about():
     news_j = get_news()
     return render_template("news/index.html", len=len(news_j), news=news_j)
 
-@app.route('/news/<id>')
-def news_id(id):
-    return render_template("news/news.html")
+@app.route('/about/<link>')
+def about_redirect(link):
+    return redirect("https://vk.com/vgovernments")
 
 @app.route('/faq')
 def faq():
