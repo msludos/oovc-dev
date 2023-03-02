@@ -10,14 +10,20 @@ def get_vcs_api():
     host = os.environ.get("VCS_API")
     return host
 
+def get_vk_api():
+    host = os.environ.get("VKAPI")
+    return host
+
 def get_news():
-    url = get_host()+"/method/news.gets?access_token="+get_vcs_api()
-    news = requests.get(url).json() 
     r = []
 
-    for n in news:
-        if n["id"] > 1249:
-            r.append(n)
+    for offset in range(0, 1300, 100):
+        req = requests.get("https://api.vk.com/method/wall.get?owner_id=-201784905&count=100&offset="+str(offset)+"&v=5.131&access_token="+get_vk_api()).json()["response"]["items"]
+    
+        for i in req:
+            r.append(i["text"])
+
+        sleep(2)
 
     return r
 
@@ -40,7 +46,7 @@ def get_country(id):
     return country
 
 def get_geo():
-    ids = requests.get("https://vcs.pythonanywhere.com/method/geo.ids?access_token="+get_vcs_api()).json()
+    ids = requests.get(get_host()+"method/geo.ids?access_token="+get_vcs_api()).json()
     return ids
 
 
