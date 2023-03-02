@@ -76,18 +76,9 @@ def countries():
 def country(id):
     return render_template("countries/country.html", country=get_country(id))
 
-@app.route('/about')
-def about():
-    news_j = get_news()
-    return render_template("news/index.html", len=len(news_j), news=news_j)
-
-@app.route('/about/<link>')
-def about_redirect(link):
-    return redirect("https://vk.com/vgovernments")
-
 @app.route('/faq')
 def faq():
-    return render_template("faq/index.html")
+    return render_template("faq.html")
 
 @app.route('/redirect/geo')
 def Rgeo():
